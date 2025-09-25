@@ -1,5 +1,3 @@
-// filepath: /Users/vitor/projects/optimizely-scala-poc/src/main/scala/Program.scala
-
 import com.optimizely.ab.Optimizely
 import com.optimizely.ab.OptimizelyFactory
 import com.optimizely.ab.OptimizelyUserContext
