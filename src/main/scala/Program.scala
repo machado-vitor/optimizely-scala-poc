@@ -12,23 +12,17 @@ import scala.util.Random
 
   try {
     if (optimizelyClient.isValid) {
-      // To get rapid demo results, generate random users. Each user always sees the same variation unless you reconfigure the flag rule.
       val rnd = new Random()
 
       var hasOnFlags = false
 
       (0 until 10).foreach { _ =>
         val userId = (rnd.nextInt(9999 - 1000) + 1000).toString
-
-        // Create hardcoded user & bucket user into a flag variation
         val user: OptimizelyUserContext = optimizelyClient.createUserContext(userId)
         // "product_sort" corresponds to a flag key in your Optimizely project
         val decision: OptimizelyDecision = user.decide("product_sort")
 
-        // did decision fail with a critical error?
-        if (decision.getVariationKey == null) {
-          println(s"\n\ndecision error: ${decision.getReasons}")
-        }
+        if (null == decision.getVariationKey) println(s"\n\ndecision error: ${decision.getReasons}")
 
         // get a dynamic configuration variable
         // "sort_method" corresponds to a variable key in your Optimizely project
@@ -39,14 +33,13 @@ import scala.util.Random
           case e: JsonParseException => e.printStackTrace()
         }
 
-        if (decision.getEnabled) {
-          // Keep count how many visitors had the flag enabled
-          hasOnFlags = true
-        }
+        if (decision.getEnabled) hasOnFlags = true
 
         // Mock what the users sees with print statements (in production, use flag variables to implement feature configuration)
         println(
-          s"\n\nFlag ${if (decision.getEnabled) "on" else "off"}. User number ${user.getUserId} saw flag variation: ${decision.getVariationKey} and got products sorted by: ${Option(sortMethod).getOrElse("<unset>")} config variable as part of flag rule: ${decision.getRuleKey}"
+          s"\n\nFlag ${if (decision.getEnabled) "on" else "off"}." +
+            s" User number ${user.getUserId} saw flag variation: ${decision.getVariationKey} " +
+            s"and got products sorted by: ${Option(sortMethod).getOrElse("<unset>")} config variable as part of flag rule: ${decision.getRuleKey}"
         )
       }
 
