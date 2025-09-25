@@ -4,7 +4,7 @@ import com.optimizely.ab.OptimizelyUserContext
 import com.optimizely.ab.config.parser.JsonParseException
 import com.optimizely.ab.optimizelydecision.OptimizelyDecision
 
-import java.util.Random
+import scala.util.Random
 
 @main def run(): Unit = {
   // this Optimizely initialization is synchronous. for other methods see the Java SDK reference
