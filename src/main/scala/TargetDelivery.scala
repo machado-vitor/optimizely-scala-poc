@@ -7,7 +7,7 @@ import com.optimizely.ab.optimizelydecision.OptimizelyDecision
 import scala.util.Random
 
 object TargetDelivery {
-  @main def run(): Unit = {
+  @main def runTargetDelivery(): Unit = {
     // this Optimizely initialization is synchronous. for other methods see the Java SDK reference
     val optimizelyClient: Optimizely = OptimizelyFactory.newDefaultInstance("") // key goes here
 

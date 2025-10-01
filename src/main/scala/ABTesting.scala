@@ -22,7 +22,7 @@ object ABTesting {
        --------------------------------
       */
       // To enable, set enableDecisionListener = true
-      val enableDecisionListener = false
+      val enableDecisionListener = true
       val maybeNotificationId: Option[Int] =
         if (enableDecisionListener) {
           val mapper = new ObjectMapper()
